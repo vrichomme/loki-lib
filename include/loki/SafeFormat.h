@@ -41,6 +41,7 @@
 #include <cassert>
 #include <locale>
 #include <iostream>
+#include <algorithm>
 
 #include <loki/LokiExport.h>
 #include <loki/TypeTraits.h>

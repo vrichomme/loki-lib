@@ -119,7 +119,7 @@ private:
 #endif
 
 
-// Test: don't compile with incomplete type and auto_ptr
+// Test: don't compile with incomplete type and unique_ptr
 
 #include <memory>
 
@@ -130,6 +130,6 @@ public:
     Incomplete4();
     void foo();
 private:
-    Pimpl<Impl4, std::auto_ptr<Impl4> > d;
+    Pimpl<Impl4, std::unique_ptr<Impl4> > d;
 };
 

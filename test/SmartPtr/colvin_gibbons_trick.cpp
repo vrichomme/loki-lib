@@ -16,8 +16,8 @@
 // ----------------------------------------------------------------------------
 
 
-// loki_smart_auto_ptr.cpp Test program for Loki::SmartPtr configured as
-// auto_ptr using Colvin-Gibbons trick
+// loki_smart_unique_ptr.cpp Test program for Loki::SmartPtr configured as
+// unique_ptr using Colvin-Gibbons trick
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -55,8 +55,8 @@ public:
 
 // ----------------------------------------------------------------------------
 
-typedef auto_ptr< Base > AutoPtrBase;
-typedef auto_ptr< Derived > AutoPtrDerived;
+typedef unique_ptr< Base > AutoPtrBase;
+typedef unique_ptr< Derived > AutoPtrDerived;
 
 typedef SmartPtr< Base, DestructiveCopy > SmartAutoPtrBase;
 typedef SmartPtr< Derived, DestructiveCopy > SmartAutoPtrDerived;

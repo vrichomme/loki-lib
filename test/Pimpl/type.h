@@ -91,7 +91,7 @@ struct E;
 
 typedef SmartPtr<ImplOf<E> >      LokiPtr;
 typedef ConstPropPtr<ImplOf<E> >  CPropPtr;
-typedef std::auto_ptr<ImplOf<E> > StdAutoPtr;
+typedef std::unique_ptr<ImplOf<E> > StdUniquePtr;
 
 #ifdef TEST_WITH_BOOST
     typedef boost::shared_ptr<ImplOf<E> > BoostPtr;
@@ -107,7 +107,7 @@ typedef Pimpl<ImplOf<E> >             Pimpl1;
 typedef Pimpl<ImplOf<E>, CPropPtr>    Pimpl2;
 typedef Pimpl<ImplOf<E>, LokiPtr>     Pimpl3;
 typedef Pimpl<ImplOf<E>, BoostPtr>    Pimpl4;
-typedef Pimpl<ImplOf<E>, StdAutoPtr>  Pimpl5;
+typedef Pimpl<ImplOf<E>, StdUniquePtr>  Pimpl5;
 
 struct P1 {Pimpl1 d;        P1();void f();void f()const;};
 struct P2 {Pimpl2 d;        P2();void f();void f()const;};
@@ -122,7 +122,7 @@ typedef PimplOwner<ImplOf<E> >            PimplOwner1;
 typedef PimplOwner<ImplOf<E>, CPropPtr>   PimplOwner2;
 typedef PimplOwner<ImplOf<E>, LokiPtr>    PimplOwner3;
 typedef PimplOwner<ImplOf<E>, BoostPtr>   PimplOwner4;
-typedef PimplOwner<ImplOf<E>, StdAutoPtr> PimplOwner5;
+typedef PimplOwner<ImplOf<E>, StdUniquePtr> PimplOwner5;
 
 struct PO1 : private PimplOwner1 {PO1();void f();void f()const;};
 struct PO2 : private PimplOwner2 {PO2();void f();void f()const;};

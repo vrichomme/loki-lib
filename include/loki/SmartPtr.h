@@ -2011,9 +2011,11 @@ namespace std
         template <class> class CNP
     >
     struct less< Loki::SmartPtr<T, OP, CP, KP, SP, CNP > >
-        : public binary_function<Loki::SmartPtr<T, OP, CP, KP, SP, CNP >,
-            Loki::SmartPtr<T, OP, CP, KP, SP, CNP >, bool>
     {
+       using result_type = bool;
+       using first_argument_type = Loki::SmartPtr<T, OP, CP, KP, SP, CNP >;
+       using second_argument_type = Loki::SmartPtr<T, OP, CP, KP, SP, CNP >;
+
         bool operator()(const Loki::SmartPtr<T, OP, CP, KP, SP, CNP >& lhs,
             const Loki::SmartPtr<T, OP, CP, KP, SP, CNP >& rhs) const
         { return less<T*>()(GetImpl(lhs), GetImpl(rhs)); }

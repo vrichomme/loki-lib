@@ -623,7 +623,7 @@ class CheckStaticForNoThrow
 public:
     inline bool Check( void )
     {
-        const bool okay = !::std::uncaught_exception();
+        const bool okay = !::std::uncaught_exceptions();
         assert( okay );
         return okay;
     }
