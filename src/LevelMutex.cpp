@@ -35,9 +35,17 @@
 
 #if defined( LOKI_THREAD_LOCAL )
 
+#define CXX_11 
+
 #if !defined( _MSC_VER )
-    #include <unistd.h> // needed for usleep function.
+#  ifdef CXX_11
+#     include <chrono>
+#     include <thread>
+#else
+#     include <unistd.h> // needed for usleep function.
+#  endif
 #endif
+
 #include <algorithm>
 #include <cerrno>
 #if defined( DEBUG ) || defined( _DEBUG )
@@ -934,12 +942,17 @@ MutexErrors::Type ThrowOnBadDesignMutexError::CheckError( MutexErrors::Type erro
 
 void MutexSleepWaits::Wait( void )
 {
+
 #if defined( _MSC_VER )
-    ::SleepEx( sleepTime, true );
+   ::SleepEx(sleepTime, true);
 #else
-    if ( 0 == sleepTime )
-        sleepTime = 1;
-    ::usleep( sleepTime * 1000 );
+#  ifdef CXX_11
+   std::this_thread::sleep_for(std::chrono::milliseconds(sleepTime));
+#  else
+   if (0 == sleepTime)
+      sleepTime = 1;
+   ::usleep(sleepTime * 1000);
+#  endif
 #endif
 }
 
@@ -1128,11 +1141,17 @@ MutexErrors::Type SleepLevelMutex::Lock( void ) volatile
         locked = ( MutexErrors::Success == TryLock() );
         if ( locked )
             break;
+
 #if defined( _MSC_VER )
         ::SleepEx( m_sleepTime, m_wakable );
 #else
+#  ifdef CXX_11
+        std::this_thread::sleep_for(std::chrono::milliseconds(m_sleepTime));
+#  else
         ::usleep( m_sleepTime * 1000 );
+#  endif
 #endif
+
     }
     return MutexErrors::Success;
 }
