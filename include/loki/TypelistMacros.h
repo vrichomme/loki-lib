@@ -30,7 +30,7 @@
 // $Id$
 
 
-//#define LOKI_DISABLE_TYPELIST_MACROS
+#define LOKI_DISABLE_TYPELIST_MACROS
 #ifndef LOKI_DISABLE_TYPELIST_MACROS
 
 ////////////////////////////////////////////////////////////////////////////////
